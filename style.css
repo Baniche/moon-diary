@@ -1,1 +1,136 @@
-/* Код усіх стилів*
+/* Код усіх стилів */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap');
+
+body {
+    margin: 0;
+    background-color: #b5fccd;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.start-scr {
+    background-color: #b5fccd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.start-scr-text {
+    position: absolute;
+    top: 10%;
+    margin-left: 100px;
+    margin-right: 100px;
+    font-size: 24px; 
+    max-width: 500px;
+    min-width: 200px;
+}
+
+.start-btn {
+    background-color: #d9d9d9;
+    padding: 20px 100px;
+    border-radius: 30px;
+    font-size: 20px;
+}
+
+.start-btn:hover {
+    cursor: pointer;
+    background-color: #d49393;
+}
+
+.start-btn:active {
+    box-shadow: 10px 5px 5px #eba0a0;
+}
+
+
+.main-page-text {
+    display: flex;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    justify-content: center;
+}
+
+.select-emoji {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.emoji-img {
+    width: 80px;
+}
+
+.emoji {
+    width: 75px;
+    height: 75px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 30px;
+    background-color: #d9d9d9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.emoji:hover {
+    cursor: pointer;
+}
+
+.comment-block {
+    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.input-comment {
+    width: 700px;
+    border: none;
+    background-color: #d9d9d9;
+    padding: 37.5px;
+    border-radius: 30px;
+}
+.input-comment::placeholder {
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    color: #454141;
+}
+
+.send-btn {
+    width: 75px;  
+}
+
+.for-next-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 120px;
+    padding: 10px;
+    background-color: #d9d9d9;
+    width: 300px;
+    height: 40px;
+    border-radius: 30px;
+}
+.for-next-btn:hover {
+    cursor: pointer;
+}
+
+
+
+
