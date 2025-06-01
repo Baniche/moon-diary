@@ -1,113 +1,136 @@
+/* Код усіх стилів */
 
-/* Повноекранний фон */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background: #e6f2f2; /* світло-блакитний фон */
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap');
+
+body {
+    margin: 0;
+    background-color: #b5fccd;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Контейнер календаря */
-.calendar-container {
-  background: white;
-  border: 5px solid #a6e3d4; /* м’ятна рамка */
-  padding: 20px;
-  border-radius: 10px;
-  box-sizing: border-box;
-  width: 500px;
-  height: auto;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+
+.start-scr {
+    background-color: #b5fccd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
-/* Заголовок */
-.calendar-header {
-  text-align: center;
-  font-size: 20px;
-  margin-bottom: 10px;
-  font-weight: bold;
+.start-scr-text {
+    position: absolute;
+    top: 10%;
+    margin-left: 100px;
+    margin-right: 100px;
+    font-size: 24px; 
+    max-width: 500px;
+    min-width: 200px;
 }
 
-.calendar-header button {
-  margin: 0 10px;
-  padding: 4px 10px;
-  font-size: 16px;
-  background: #f0f0f0;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  border-radius: 4px;
+.start-btn {
+    background-color: #d9d9d9;
+    padding: 20px 100px;
+    border-radius: 30px;
+    font-size: 20px;
 }
 
-/* Таблиця */
-#calendar {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
+.start-btn:hover {
+    cursor: pointer;
+    background-color: #d49393;
 }
 
-/* Заголовки днів тижня */
-#calendar th {
-  font-size: 16px;
-  font-weight: bold;
-  padding: 8px;
-  background-color: #d9edf0;
-  color: #333;
+.start-btn:active {
+    box-shadow: 10px 5px 5px #eba0a0;
 }
 
-/* Клітинки з числами */
-#calendar td {
-  border: 1px solid #ccc;
-  height: 60px;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 22px;
-  font-weight: bold;
-  color: #333;
-  background-color: #f9f9f9;
-  cursor: pointer;
-  position: relative;
-  transition: background 0.2s;
+
+.main-page-text {
+    display: flex;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    justify-content: center;
 }
 
-#calendar td:hover {
-  background-color: #e0f7f4;
+.select-emoji {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
 
-.today {
-  background-color: #b6f5dc !important;
+.emoji-img {
+    width: 80px;
 }
 
-/* Емодзі в клітинках */
 .emoji {
-  display: block;
-  font-size: 22px;
-  margin-top: 5px;
+    width: 75px;
+    height: 75px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 30px;
+    background-color: #d9d9d9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.emoji:hover {
+    cursor: pointer;
 }
 
-/* Вибір емоцій */
-.emoji-picker {
-  position: absolute;
-  display: none;
-  background: white;
-  border: 1px solid #aaa;
-  padding: 8px;
-  border-radius: 10px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.2);
-  z-index: 1000;
-  gap: 5px;
-  flex-wrap: wrap;
+.comment-block {
+    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
 
-.emoji-picker span {
-  font-size: 26px;
-  margin: 5px;
-  cursor: pointer;
-  transition: transform 0.2s;
+.input-comment {
+    width: 700px;
+    border: none;
+    background-color: #d9d9d9;
+    padding: 37.5px;
+    border-radius: 30px;
+}
+.input-comment::placeholder {
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    color: #454141;
 }
 
-.emoji-picker span:hover {
-  transform: scale(1.2);
+.send-btn {
+    width: 75px;  
 }
+
+.for-next-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 120px;
+    padding: 10px;
+    background-color: #d9d9d9;
+    width: 300px;
+    height: 40px;
+    border-radius: 30px;
+}
+.for-next-btn:hover {
+    cursor: pointer;
+}
+
+
+
+
