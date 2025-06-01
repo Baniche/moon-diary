@@ -116,6 +116,11 @@ body {
     width: 75px;  
 }
 
+.next-btn {
+    text-decoration: none;
+    color: black;
+}
+
 .for-next-btn {
     display: flex;
     align-items: center;
