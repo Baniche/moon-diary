@@ -1,100 +1,91 @@
 
-const calendarBody = document.getElementById("calendar-body");
-const monthYear = document.getElementById("month-year");
-const prevBtn = document.getElementById("prev");
-const nextBtn = document.getElementById("next");
-const emojiPicker = document.getElementById("emoji-picker");
+const diaryKey = "moonDiary";
 
-let currentDate = new Date();
-let moodData = {}; // moodData['2025-05-25'] = "😊"
+const state = {
+  viewYear: new Date().getFullYear(),
+  viewMonth: new Date().getMonth(), // 0‑11
+};
 
-function renderCalendar() {
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-  const firstDay = new Date(year, month, 1).getDay(); // Нд = 0
-  const adjustedFirstDay = (firstDay + 6) % 7; // Перетворюємо так, щоб Пн = 0
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
+window.addEventListener("DOMContentLoaded", () => {
+  // Элементы управления
+  const tbody = document.getElementById("calendar-body");
+  const monthLabel = document.getElementById("month-label");
+  const prevBtn = document.getElementById("prev-month");
+  const nextBtn = document.getElementById("next-month");
 
-  calendarBody.innerHTML = "";
-  monthYear.textContent = `${getMonthName(month)} ${year}`;
+  prevBtn.addEventListener("click", () => {
+    state.viewMonth -= 1;
+    if (state.viewMonth < 0) {
+      state.viewMonth = 11;
+      state.viewYear -= 1;
+    }
+    render();
+  });
 
-  let row = document.createElement("tr");
-  let dayCount = 1;
+  nextBtn.addEventListener("click", () => {
+    state.viewMonth += 1;
+    if (state.viewMonth > 11) {
+      state.viewMonth = 0;
+      state.viewYear += 1;
+    }
+    render();
+  });
 
-  // Заповнюємо 6 тижнів максимум
-  for (let i = 0; i < 6; i++) {
-    for (let d = 0; d < 7; d++) {
-      const cell = document.createElement("td");
+  render();
 
-      if (i === 0 && d < adjustedFirstDay) {
-        cell.innerHTML = "";
-      } else if (dayCount > daysInMonth) {
-        cell.innerHTML = "";
-      } else {
-        const dateKey = `${year}-${month + 1}-${dayCount}`;
-        const emoji = moodData[dateKey] || "";
-        const isToday =
-          dayCount === new Date().getDate() &&
-          month === new Date().getMonth() &&
-          year === new Date().getFullYear();
+  // ====== functions ======
+  function render() {
+    buildCalendar(state.viewYear, state.viewMonth);
+    paintDiary();
+    monthLabel.textContent = new Date(state.viewYear, state.viewMonth).toLocaleDateString("ru-RU", {
+      year: "numeric",
+      month: "long",
+    });
+  }
 
-        cell.innerHTML = `${dayCount}<span class="emoji">${emoji}</span>`;
-        if (isToday) cell.classList.add("today");
-        cell.dataset.date = dateKey;
+  function buildCalendar(y, m) {
+    tbody.innerHTML = "";
 
-        cell.addEventListener("click", (e) => {
-          showEmojiPicker(e.target, dateKey);
-        });
+    const firstDay = new Date(y, m, 1);
+    let startWeekday = firstDay.getDay();
+    // Перенос воскресенья (0) в конец, делаем Пн=0, Вс=6
+    startWeekday = (startWeekday + 6) % 7;
 
-        dayCount++;
+    const daysInMonth = new Date(y, m + 1, 0).getDate();
+
+    let date = 1;
+    for (let i = 0; i < 6; i++) {
+      const row = document.createElement("tr");
+
+      for (let j = 0; j < 7; j++) {
+        const cell = document.createElement("td");
+
+        if (i === 0 && j < startWeekday) {
+          cell.classList.add("empty");
+        } else if (date > daysInMonth) {
+          cell.classList.add("empty");
+        } else {
+          const iso = `${y}-${String(m + 1).padStart(2, "0")}-${String(date).padStart(2, "0")}`;
+          cell.dataset.date = iso;
+          cell.textContent = date;
+          date += 1;
+        }
+        row.appendChild(cell);
       }
 
-      row.appendChild(cell);
+      tbody.appendChild(row);
+      if (date > daysInMonth) break; // лишние строки не нужны
     }
-    calendarBody.appendChild(row);
-    row = document.createElement("tr");
   }
-}
 
-function getMonthName(monthIndex) {
-  const names = [
-    "Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень",
-    "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"
-  ];
-  return names[monthIndex];
-}
-
-function showEmojiPicker(targetCell, dateKey) {
-  const rect = targetCell.getBoundingClientRect();
-  emojiPicker.style.left = `${rect.left + window.scrollX}px`;
-  emojiPicker.style.top = `${rect.bottom + window.scrollY}px`;
-  emojiPicker.style.display = "flex";
-  emojiPicker.dataset.date = dateKey;
-}
-
-emojiPicker.querySelectorAll("span").forEach(span => {
-  span.addEventListener("click", () => {
-    const date = emojiPicker.dataset.date;
-    moodData[date] = span.dataset.emoji;
-    emojiPicker.style.display = "none";
-    renderCalendar();
-  });
-});
-
-document.addEventListener("click", (e) => {
-  if (!emojiPicker.contains(e.target) && !e.target.closest("td")) {
-    emojiPicker.style.display = "none";
+  function paintDiary() {
+    const diary = JSON.parse(localStorage.getItem(diaryKey)) || {};
+    Object.entries(diary).forEach(([iso, emoji]) => {
+      const cell = document.querySelector(`[data-date='${iso}']`);
+      if (cell) {
+        cell.textContent = emoji;
+        cell.classList.add("has-emoji");
+      }
+    });
   }
 });
-
-prevBtn.onclick = () => {
-  currentDate.setMonth(currentDate.getMonth() - 1);
-  renderCalendar();
-};
-
-nextBtn.onclick = () => {
-  currentDate.setMonth(currentDate.getMonth() + 1);
-  renderCalendar();
-};
-
-renderCalendar();

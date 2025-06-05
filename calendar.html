@@ -1,45 +1,32 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Moon diary</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moon Diary — Календарь</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="calendar.css" />
 </head>
 <body>
-  <div class="calendar-container">
-    <div class="calendar-header">
-      <button id="prev">&#8592;</button>
-      <span id="month-year"></span>
-      <button id="next">&#8594;</button>
-    </div>
-
+  <h1>Мой дневник эмоций</h1>
+  <div class="calendar-wrapper">
     <table id="calendar">
       <thead>
         <tr>
-          <th>Пн</th>
-          <th>Вт</th>
-          <th>Ср</th>
-          <th>Чт</th>
-          <th>Пт</th>
-          <th>Сб</th>
-          <th>Нд</th>
+          <th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th>
         </tr>
       </thead>
-      <tbody id="calendar-body">
-        <!-- Дні календаря -->
-      </tbody>
+      <tbody id="calendar-body"><!-- генерируется скриптом --></tbody>
     </table>
+  </div>
 
-    <!-- Вибір емоцій -->
-    <div class="emoji-picker" id="emoji-picker">
-      <span data-emoji="😊">😊</span>
-      <span data-emoji="😐">😐</span>
-      <span data-emoji="😢">😢</span>
-      <span data-emoji="😠">😠</span>
-    </div>
+  <div class="controls">
+    <button id="prev-month">← Пред</button>
+    <span id="month-label"></span>
+    <button id="next-month">След →</button>
   </div>
 
   <script src="script2.js"></script>
 </body>
 </html>
-
