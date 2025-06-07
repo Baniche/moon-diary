@@ -3,11 +3,11 @@ const diaryKey = "moonDiary";
 
 const state = {
   viewYear: new Date().getFullYear(),
-  viewMonth: new Date().getMonth(), // 0‑11
+  viewMonth: new Date().getMonth(),
 };
 
 window.addEventListener("DOMContentLoaded", () => {
-  // Элементы управления
+  
   const tbody = document.getElementById("calendar-body");
   const monthLabel = document.getElementById("month-label");
   const prevBtn = document.getElementById("prev-month");
@@ -33,7 +33,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   render();
 
-  // ====== functions ======
+  
   function render() {
     buildCalendar(state.viewYear, state.viewMonth);
     paintDiary();
@@ -48,7 +48,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const firstDay = new Date(y, m, 1);
     let startWeekday = firstDay.getDay();
-    // Перенос воскресенья (0) в конец, делаем Пн=0, Вс=6
+    
     startWeekday = (startWeekday + 6) % 7;
 
     const daysInMonth = new Date(y, m + 1, 0).getDate();
@@ -74,7 +74,7 @@ window.addEventListener("DOMContentLoaded", () => {
       }
 
       tbody.appendChild(row);
-      if (date > daysInMonth) break; // лишние строки не нужны
+      if (date > daysInMonth) break; 
     }
   }
 

@@ -16,7 +16,7 @@ const isoDate = now.getFullYear() + "-" +
       diary[isoDate] = emoji;
       localStorage.setItem(diaryKey, JSON.stringify(diary));
 
-      // Переходим к календарю
+      
       window.location.href = "calendar.html";
     });
   });
