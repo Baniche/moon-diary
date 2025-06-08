@@ -1,38 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Moon Diary</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moon Diary — Выбор эмоции</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+  <h1>Твій сьогоднішній настрій</h1>
 
-    <div class="start-scr">
-        <p class="start-scr-text">Moon Diary - це веб додаток в якому ти можеш дослідити свій настрій.</p>
-        <a class="start-btn">Почати</a>
+  <p class="hint">Вибери емодзі яке описує твій сьогоднішній настрій.</p>
 
-    </div>
+  <div id="emoji-picker">
+    <button class="emoji-btn">😀</button>
+    <button class="emoji-btn">😌</button>
+    <button class="emoji-btn">😢</button>
+    <button class="emoji-btn">😡</button>
+    <button class="emoji-btn">😴</button>
+    <button class="emoji-btn">😎</button>
+  </div>
 
-    <p class="main-page-text">Тут ти можеш обрати свій настрій та залишити коментар майбутньому собі</p>
-    <div class="select-emoji">
-        <a class="emoji"><img class="emoji-img" src="./src/image 4.png"></a>
-        <a class="emoji"><img class="emoji-img" src="./src/image 3.png"></a>
-        <a class="emoji"><img class="emoji-img" src="./src/image 5.png"></a>
-        <a class="emoji"><img class="emoji-img" src="./src/image 6.png"></a>
-    </div>
-    <div class="comment-block">
-        <input class="input-comment" type="text" placeholder="Залиш тут свій коментар...">
-        <a class="sumbit-btn" href=""><img class="send-btn" src="./src/Frame.png"></a>
-    </div>
-    <div class="for-next-btn">
-        <a href="calendar.html" class="next-btn" >Продовжити</a>
-    </div>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
-
 </html>
-
