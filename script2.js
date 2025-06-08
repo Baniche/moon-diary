@@ -83,7 +83,7 @@ window.addEventListener("DOMContentLoaded", () => {
     Object.entries(diary).forEach(([iso, data]) => {
       const cell = document.querySelector(`[data-date='${iso}']`);
       if (cell) {
-        const emoji = typeof data === "string" ? data : data.mood || "😊";
+        const emoji = typeof data === "string" ? data : data.mood;
         cell.textContent = emoji;
         cell.classList.add("has-emoji");
       }
