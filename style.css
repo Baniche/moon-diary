@@ -2,6 +2,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap');
 
+:root {
+  --light-blue: #e0f2fe;
+  --blue: #3b82f6;
+  --blue-dark: #2563eb;
+  --text-dark: #1e3a8a;
+}
+
 body {
     margin: 0;
     background-color: #b5fccd;
