@@ -79,11 +79,11 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function paintDiary() {
-    const diary = JSON.parse(localStorage.getItem(diaryKey))  {};
+    const diary = JSON.parse(localStorage.getItem(diaryKey)) || {};
     Object.entries(diary).forEach(([iso, data]) => {
       const cell = document.querySelector(`[data-date='${iso}']`);
       if (cell) {
-        const emoji = typeof data === "string" ? data : data.mood  "😊";
+        const emoji = typeof data === "string" ? data : (data.mood || "😊");
         cell.textContent = emoji;
         cell.classList.add("has-emoji");
       }
@@ -102,14 +102,14 @@ window.addEventListener("DOMContentLoaded", () => {
   // Відкриття модалки по кліку на клітинку
   tbody.addEventListener("click", (e) => {
     const cell = e.target.closest("td");
-    if (!cell!cell.dataset.date) return;
+    if (!cell || !cell.dataset.date) return;
 
   selectedDate = cell.dataset.date;
-  const diary = JSON.parse(localStorage.getItem(diaryKey))  { };
-  const entry = diary[selectedDate]  "";
+  const diary = JSON.parse(localStorage.getItem(diaryKey)) || {};
+  const entry = diary[selectedDate] || "";
 
-  commentText.value = typeof entry === "object" ? entry.comment  "" : ""; // Якщо зберігатимеш mood+comment
-  dateLabel.textContent = Дата: ${ selectedDate };
+  commentText.value = typeof entry === "object" ? entry.comment : ""; // Якщо зберігатимеш mood+comment
+  dateLabel.textContent = `Дата: ${selectedDate}`;
   modal.style.display = "block";
 });
 
