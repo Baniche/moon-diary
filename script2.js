@@ -83,12 +83,13 @@ window.addEventListener("DOMContentLoaded", () => {
     Object.entries(diary).forEach(([iso, data]) => {
       const cell = document.querySelector(`[data-date='${iso}']`);
       if (cell) {
-        const emoji = typeof data === "string" ? data : (data.mood || "😊");
+        const emoji = typeof data === "string" ? data : data.mood || "😊";
         cell.textContent = emoji;
         cell.classList.add("has-emoji");
       }
     });
   }
+
   // ==== ДОДАТКОВА ЛОГІКА ДЛЯ КОМЕНТАРІВ ==== //
 
   const modal = document.getElementById("comment-modal");
@@ -104,31 +105,32 @@ window.addEventListener("DOMContentLoaded", () => {
     const cell = e.target.closest("td");
     if (!cell || !cell.dataset.date) return;
 
-  selectedDate = cell.dataset.date;
-  const diary = JSON.parse(localStorage.getItem(diaryKey)) || {};
-  const entry = diary[selectedDate] || "";
+    selectedDate = cell.dataset.date;
+    const diary = JSON.parse(localStorage.getItem(diaryKey)) || {};
+    const entry = diary[selectedDate] || "";
 
-  commentText.value = typeof entry === "object" ? entry.comment : ""; // Якщо зберігатимеш mood+comment
-  dateLabel.textContent = `Дата: ${selectedDate}`;
-  modal.style.display = "block";
+    commentText.value = typeof entry === "object" ? entry.comment || "" : ""; // Якщо зберігатимеш mood+comment
+    dateLabel.textContent = `Дата: ${selectedDate}`;
+    modal.style.display = "block";
+  });
+
+  // Закриття модалки
+  closeModal.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // Збереження коментаря
+  saveCommentBtn.addEventListener("click", () => {
+    const comment = commentText.value;
+    const diary = JSON.parse(localStorage.getItem(diaryKey)) || {};
+
+    if (!diary[selectedDate]) diary[selectedDate] = {};
+    if (typeof diary[selectedDate] === "string") diary[selectedDate] = { mood: diary[selectedDate] }; // якщо там емодзі
+
+    diary[selectedDate].comment = comment;
+    localStorage.setItem(diaryKey, JSON.stringify(diary));
+    modal.style.display = "none";
+  });
+
 });
 
-// Закриття модалки
-closeModal.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-
-// Збереження коментаря
-saveCommentBtn.addEventListener("click", () => {
-  const comment = commentText.value;
-  const diary = JSON.parse(localStorage.getItem(diaryKey)) || {};
-
-  if (!diary[selectedDate]) diary[selectedDate] = {};
-  if (typeof diary[selectedDate] === "string") diary[selectedDate] = { mood: diary[selectedDate] }; // якщо там емодзі
-
-  diary[selectedDate].comment = comment;
-  localStorage.setItem(diaryKey, JSON.stringify(diary));
-  modal.style.display = "none";
-});
-  
-});
