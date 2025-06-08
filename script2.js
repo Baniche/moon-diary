@@ -79,16 +79,16 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function paintDiary() {
-    const diary = JSON.parse(localStorage.getItem(diaryKey)) || {};
-    Object.entries(diary).forEach(([iso, emoji]) => {
+    const diary = JSON.parse(localStorage.getItem(diaryKey))  {};
+    Object.entries(diary).forEach(([iso, data]) => {
       const cell = document.querySelector(`[data-date='${iso}']`);
       if (cell) {
+        const emoji = typeof data === "string" ? data : data.mood  "😊";
         cell.textContent = emoji;
         cell.classList.add("has-emoji");
       }
     });
   }
-
   // ==== ДОДАТКОВА ЛОГІКА ДЛЯ КОМЕНТАРІВ ==== //
 
   const modal = document.getElementById("comment-modal");
